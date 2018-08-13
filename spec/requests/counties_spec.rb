@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Counties API', type: request do
+RSpec.describe 'Counties API', type: :request do
    # initialize test data 
   let!(:counties) { create_list(:county, 10) }
   let(:county_id) { counties.first.id }
@@ -22,13 +22,13 @@ RSpec.describe 'Counties API', type: request do
 
   # Test suite for POST /counties
   describe 'POST /counties' do
-    let(:valid_attributes) { { title: 'Kern' , lat: 35.2736961, lng: -121.1482965, active: true} }
+    let(:valid_attributes) { { title: 'Kern' , lat: 35.2736961, lng: -121.1482965} }
     
     context 'when the request is valid' do
       before { post '/counties', params: valid_attributes }
 
-      it 'creates a todo' do
-        expect(json['title']).to eq('Kern')
+      it 'creates a county' do
+        expect(json['title']).to eq('Kern') #chang expect(json.to eq)...the entire json object
       end
 
       it 'returns status code 201' do
@@ -37,7 +37,7 @@ RSpec.describe 'Counties API', type: request do
     end
 
     context 'when the request is invalid' do
-      before { post '/counties', params { title: "meow" } }
+      before { post '/counties', params: { title: 'meow' } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -45,8 +45,9 @@ RSpec.describe 'Counties API', type: request do
 
       it 'returns a validation failure message' do
         expect(response.body)
-        .to match(/Validation failed: lat, lng, active can't be blank/)
+          .to match(/Validation failed: lat, lng, active can't be blank/)
       end
     end
   end
+end
 

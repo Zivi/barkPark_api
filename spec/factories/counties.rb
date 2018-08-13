@@ -3,6 +3,6 @@ FactoryBot.define do
     title { Faker::Lorem.word }
     lat { Faker::Address.latitude }
     lng { Faker::Address.longitude }
-    active { Faker::Boolean.boolean }
+    active true
   end
 end

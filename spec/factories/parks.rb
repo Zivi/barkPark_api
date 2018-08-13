@@ -3,9 +3,9 @@ FactoryBot.define do
     name { Faker::Lorem.word }
     lat { Faker::Address.latitude }
     lng { Faker::Address.longitude }
-    active { Faker::Boolean.boolean }
+    active true
     notes { Faker::Lorem.sentence }
     address { Faker::Address.full_address }
-    county_id nil
+    county
   end
 end
