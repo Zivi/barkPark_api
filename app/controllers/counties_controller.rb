@@ -9,7 +9,7 @@ class CountiesController < ApplicationController
 
   # POST /counties
   def create
-    @counties = Count.create!(county_params)
+    @county = County.create!(county_params)
     json_response(@county, :created)
   end
 

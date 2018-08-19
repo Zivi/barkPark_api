@@ -11,7 +11,7 @@ RSpec.describe 'Counties API', type: :request do
     before { get '/counties' }
     
     it 'returns counties' do
-      expect(json).not_to_be_empty
+      expect(json).to_not be_empty
       expect(json.size).to eq(10)
     end
 
@@ -45,7 +45,7 @@ RSpec.describe 'Counties API', type: :request do
 
       it 'returns a validation failure message' do
         expect(response.body)
-          .to match(/Validation failed: lat, lng, active can't be blank/)
+          .to match(/Validation failed: Lat can't be blank, Lng can't be blank/)
       end
     end
   end
